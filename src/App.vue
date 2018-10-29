@@ -1,5 +1,7 @@
 <template>
-  
+  <div>
+    <img src="@/assets/pallet-town-only.png">
+  </div>
 </template>
 
 <script>
