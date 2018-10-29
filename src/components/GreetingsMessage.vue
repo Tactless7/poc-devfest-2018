@@ -2,13 +2,13 @@
   <div class="message" v-if="displayGreetings">
     <p>{{greetings}}</p>
 
-      <input
-        type="text"
-        v-model="firstName"
-        v-on:keypress.enter="displayGreetings = false"
-      >
+    <input
+      type="text"
+      v-model="firstName"
+      v-on:keypress.enter="firstNameSubmit()"
+    >
 
-      <p v-if="firstName">Ah ! Je me souviens ! Bonjour {{firstName}}</p>
+    <p v-if="firstName">Ah ! Je me souviens ! Bonjour {{firstName}}</p>
   </div>
 </template>
 
@@ -20,6 +20,12 @@ export default {
       firstName: '',
       displayGreetings: true,
     };
+  },
+  methods: {
+    firstNameSubmit() {
+      this.displayGreetings = false;
+      this.$emit('greetingsFinished');
+    },
   },
 };
 </script>
