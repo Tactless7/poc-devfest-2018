@@ -1,35 +1,21 @@
 <template>
   <div class="display">
-    <img src="@/assets/pallet-town-only.png">
+    <Scene />
     <Sacha />
-
-    <div class="message" v-if="displayGreetings">
-      <p>{{greetings}}</p>
-
-      <input
-        type="text"
-        v-model="firstName"
-        v-on:keypress.enter="displayGreetings = false"
-      >
-
-      <p v-if="firstName">Ah ! Je me souviens ! Bonjour {{firstName}}</p>
-    </div>
+    <GreetingsMessage />
   </div>
 </template>
 
 <script>
+import Scene from '@/components/Scene.vue';
 import Sacha from '@/components/Sacha.vue';
+import GreetingsMessage from '@/components/GreetingsMessage.vue';
 
 export default {
   components: {
+    Scene,
     Sacha,
-  },
-  data() {
-    return {
-      greetings: 'Hé ! Bonjour, quel est ton nom ?',
-      firstName: '',
-      displayGreetings: true,
-    };
+    GreetingsMessage,
   },
 };
 </script>
@@ -44,14 +30,5 @@ export default {
   position: relative;
   display: inline-block;
   font-family: pokemon;
-}
-
-.display .message {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: #fff;
-  margin: 20px;
-  padding: 20px;
 }
 </style>
