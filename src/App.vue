@@ -1,7 +1,11 @@
 <template>
   <div class="display">
     <Scene />
-    <Sacha v-if="displaySacha" />
+    <Sacha
+      v-if="displaySacha"
+      x="200"
+      y="300"
+    />
     <GreetingsMessage v-on:greetingsFinished="displaySacha = true" />
   </div>
 </template>
