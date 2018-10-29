@@ -1,6 +1,7 @@
 <template>
   <div class="display">
     <img src="@/assets/pallet-town-only.png">
+    <Sacha />
 
     <div class="message" v-if="displayGreetings">
       <p>{{greetings}}</p>
@@ -17,7 +18,12 @@
 </template>
 
 <script>
+import Sacha from '@/components/Sacha.vue';
+
 export default {
+  components: {
+    Sacha,
+  },
   data() {
     return {
       greetings: 'Hé ! Bonjour, quel est ton nom ?',
@@ -36,6 +42,7 @@ export default {
 
 .display {
   position: relative;
+  display: inline-block;
   font-family: pokemon;
 }
 
