@@ -2,8 +2,16 @@
   <div class="display">
     <img src="@/assets/pallet-town-only.png">
 
-    <div class="message">
+    <div class="message" v-if="displayGreetings">
       <p>{{greetings}}</p>
+
+      <input
+        type="text"
+        v-model="firstName"
+        v-on:keypress.enter="displayGreetings = false"
+      >
+
+      <p v-if="firstName">Ah ! Je me souviens ! Bonjour {{firstName}}</p>
     </div>
   </div>
 </template>
@@ -13,6 +21,8 @@ export default {
   data() {
     return {
       greetings: 'Hé ! Bonjour, quel est ton nom ?',
+      firstName: '',
+      displayGreetings: true,
     };
   },
 };
