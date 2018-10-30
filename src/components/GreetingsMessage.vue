@@ -36,6 +36,7 @@ export default {
   bottom: 0;
   left: 0;
   background: #fff;
+  z-index: 2;
   margin: 20px;
   padding: 20px;
 }

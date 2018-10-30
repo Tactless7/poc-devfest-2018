@@ -8,6 +8,7 @@
     v-on:keypress.right="sacha.x += 40"
   >
     <Scene />
+    <Grid />
     <Sacha
       v-if="sacha.display"
       v-bind:x="sacha.x"
@@ -20,12 +21,14 @@
 <script>
 import Scene from '@/components/Scene.vue';
 import Sacha from '@/components/Sacha.vue';
+import Grid from '@/components/Grid.vue';
 import GreetingsMessage from '@/components/GreetingsMessage.vue';
 
 export default {
   components: {
     Scene,
     Sacha,
+    Grid,
     GreetingsMessage,
   },
   data() {
