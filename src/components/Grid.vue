@@ -2,7 +2,7 @@
   <div class="grid">
     <div class="row" v-for="y in gridHeight" :key="`row${y}`">
       <div class="square" v-for="x in gridWidth" :key="`square${x}-${y}`">
-        {{y}} - {{x}}
+        {{y - 1 }} - {{x - 1}}
       </div>
     </div>
   </div>
