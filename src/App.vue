@@ -1,12 +1,19 @@
 <template>
-  <div class="display">
+  <div class="display"
+    ref="game"
+    tabindex="0"
+    v-on:keypress.up="sacha.y -= 40"
+    v-on:keypress.down="sacha.y += 40"
+    v-on:keypress.left="sacha.x -= 40"
+    v-on:keypress.right="sacha.x += 40"
+  >
     <Scene />
     <Sacha
       v-if="sacha.display"
       v-bind:x="sacha.x"
       v-bind:y="sacha.y"
     />
-    <GreetingsMessage v-on:greetingsFinished="sacha.display = true" />
+    <GreetingsMessage v-on:greetingsFinished="startGame()" />
   </div>
 </template>
 
@@ -29,6 +36,12 @@ export default {
         display: false,
       },
     };
+  },
+  methods: {
+    startGame() {
+      this.sacha.display = true;
+      this.$refs.game.focus();
+    },
   },
 };
 </script>
