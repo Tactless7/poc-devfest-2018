@@ -4,14 +4,14 @@
     <div class="pokemon-name enemy">
       BULBIZARRE
       <br />
-      HP: 7 
+      HP: {{ enemyPokemeonHp }}
     </div>
     <img class="pokemon-image sacha" src="@/assets/Salamèche_dos.png">
 
     <div class="pokemon-name sacha">
       SALAMECHE
       <br />
-      HP: 10/10
+      HP: {{sachaPokemeonHp}}/ 10
     </div>
     <img class="pokemon-image enemy" src="@/assets/Bulbizarre.png">
 
@@ -20,7 +20,14 @@
 
 <script>
 export default {
-  
+  computed: {
+    enemyPokemeonHp() {
+      return this.$store.state.enemy.pokemon.hp
+    },
+    sachaPokemeonHp() {
+      return this.$store.state.sacha.pokemon.hp
+    }
+  }
 }
 </script>
 
