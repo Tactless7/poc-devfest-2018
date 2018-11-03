@@ -1,39 +1,43 @@
 <template>
-  <div class="root">
+<div class="root">
 
-    <div class="pokemon-name enemy">
+  <div class="enemy">
+    <img class="pokemon-image" src="@/assets/bulbizarre.png">
+    <div class="pokemon-infos">
       <div> BULBIZARRE </div>
       <PokemonHpZone who="enemy">
         <HpBar v-bind:hp="enemyPokemeonHp" />
       </PokemonHpZone>
     </div>
-    <img class="pokemon-image sacha" src="@/assets/salameche_back.png">
+  </div>
 
-    <div class="pokemon-name sacha">
+  <div class="sacha">
+    <img class="pokemon-image" src="@/assets/salameche_back.png">
+    <div class="pokemon-infos">
       <div> SALAMECHE </div>
       <PokemonHpZone who="sacha">
         <HpBar v-bind:hp="sachaPokemeonHp" />
         <div> {{sachaPokemeonHp}}/ 10 </div>
       </PokemonHpZone>
     </div>
-    <img class="pokemon-image enemy" src="@/assets/bulbizarre.png">
+  </div>
 
-    <div class="message">
-      <div class="move-buttons" v-if="step === 'ask for next move'">
-        <button class="next-move-button" v-on:click="moveSelected('GRIFFE')">GRIFFE</button>
-        <br/>
-        <button class="next-move-button" v-on:click="moveSelected('FLAMECHE')">FLAMECHE</button>
-        <br/>
-        <button class="next-move-button">-</button>
-        <br/>
-        <button class="next-move-button">-</button>
-      </div>
-      <div v-if="message !== ''">
-       {{ message }}
-      </div>
+  <div class="message">
+
+    <div class="move-buttons" v-if="step === 'ask for next move'">
+      <button v-on:click="selectMove('GRIFFE')"> GRIFFE </button> <br/>
+      <button v-on:click="selectMove('FLAMECHE')"> FLAMECHE </button> <br/>
+      <button> - </button> <br/>
+      <button> - </button>
+    </div>
+
+    <div v-if="message !== ''">
+      {{ message }}
     </div>
 
   </div>
+
+</div>
 </template>
 
 <script>
@@ -68,7 +72,7 @@ export default {
       await delay(2000);
       this.message = '';
     },
-    async moveSelected(move) {
+    async selectMove(move) {
       this.step = 'resolve battle turn';
 
       await this.displayMessage(`SALAMECHE utilise ${move}!`);
@@ -118,29 +122,29 @@ export default {
   width: 35%;
 }
 
-.sacha.pokemon-image  {
+.sacha .pokemon-image  {
   left: 4%;
   bottom: 30%;
 }
 
-.enemy.pokemon-image {
+.enemy .pokemon-image {
   right: 3%;
   top: 0;;
 }
 
-.pokemon-name {
+.pokemon-infos {
   position: absolute;
   font-size: 180%;
   color: black;
 }
 
-.sacha.pokemon-name {
+.sacha .pokemon-infos {
   top: 40%;
   left: 45%;
   width: 53%;
 }
 
-.enemy.pokemon-name {
+.enemy .pokemon-infos {
   top: 0%;
   left: 5%;
 }
@@ -161,7 +165,7 @@ export default {
   right: 0;
 }
 
-.next-move-button {
+button {
   margin-top: -8px;
   border: 0px;
   background: transparent;
@@ -169,7 +173,7 @@ export default {
   font-size: 160%;
 }
 
-.sacha > div {
+.sacha div {
   float: right;
 } 
 </style>
