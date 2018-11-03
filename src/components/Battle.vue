@@ -3,24 +3,18 @@
 
     <div class="pokemon-name enemy">
       <div> BULBIZARRE </div>
-      <div class="hp-zone">
+      <PokemonHpZone who="enemy">
         <HpBar v-bind:hp="enemyPokemeonHp" />
-        <div class="arrow part-1"></div>
-        <div class="arrow part-2"></div>
-        <div class="arrow part-3"></div>
-      </div>
+      </PokemonHpZone>
     </div>
     <img class="pokemon-image sacha" src="@/assets/Salamèche_dos.png">
 
     <div class="pokemon-name sacha">
-      <div style="float:right"> SALAMECHE </div>
-      <div class="hp-zone">
-        <HpBar style="float: right; margin-top: -14px;" v-bind:hp="sachaPokemeonHp" />
-        <div style="float: right; margin-top: -7px;"> {{sachaPokemeonHp}}/ 10 </div>
-        <div class="arrow part-1"></div>
-        <div class="arrow part-2"></div>
-        <div class="arrow part-3"></div>
-      </div>
+      <div> SALAMECHE </div>
+      <PokemonHpZone who="sacha">
+        <HpBar style="margin-top: -14px;" v-bind:hp="sachaPokemeonHp" />
+        <div style="margin-top: -7px;"> {{sachaPokemeonHp}}/ 10 </div>
+      </PokemonHpZone>
     </div>
     <img class="pokemon-image enemy" src="@/assets/Bulbizarre.png">
 
@@ -44,13 +38,15 @@
 
 <script>
 import HpBar from '@/components/HpBar.vue'
+import PokemonHpZone from '@/components/PokemonHpZone.vue'
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const pick = array =>  array[Math.floor(Math.random() * array.length)];
 
 export default {
   components: {
-    HpBar
+    HpBar,
+    PokemonHpZone
   },
   data() {
     return {
@@ -173,65 +169,7 @@ export default {
   font-size: 160%;
 }
 
-.hp-zone {
-  border-bottom: 7px solid black;
-  border-radius: 5px;
-  margin-top: 20px;
-}
-
-.sacha .hp-zone {
-  width: 80%;
+.sacha > div {
   float: right;
-  margin-right: 32px;
-  padding-right: 6px;
-  padding-bottom: 5px;
-  border-right: 7px solid black;
-}
-
-.enemy .hp-zone {
-  width: 90%;
-  margin-left: 8px;
-  padding-left: 15px;
-  padding-bottom: 15px;
-  border-left: 7px solid black;
-}
-
-.arrow {
-  background: black;
-  width: 10px;
-  height: 4px;
-  position: absolute;
-}
-
-.arrow.part-1 {
-  bottom: 0;
-}
-.arrow.part-2 {
-  bottom: 6px;
-  width: 17px;
-}
-.arrow.part-3 {
-  bottom: 9px;
-}
-
-.sacha .arrow.part-1 {
-  left: 9px;
-}
-.sacha .arrow.part-2 {
-  left: 22px;
-}
-.sacha .arrow.part-3 {
-  left: 29px;
-}
-
-.enemy .arrow.part-1 {
-  right: -7px;
-}
-.enemy .arrow.part-2 {
-  right: 6px;
-}
-.enemy .arrow.part-3 {
-  right: 13px;
-}
-
+} 
 </style>
