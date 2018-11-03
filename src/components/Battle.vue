@@ -67,14 +67,16 @@ export default {
       if (this.enemyPokemeonHp === 0) {
         await this.displayMessage(`BULBIZARRE ennemi est KO!`);
         await this.displayMessage(`SALAMECHE a gagné 83 points EXP.!`);
+        this.$store.commit('RESTORE_ENEMY_POKEMON_HP');
         this.$emit('endOfBattle');
       } else {
         const enemyMove = pick(['FOUET LIANE', 'CHARGE']);
         await this.displayMessage(`BULBIZARRE ennemi utilise ${enemyMove}!`);
-        this.$store.commit('DECREASE_SACHA_POKEMON_HP', 2);
+        this.$store.commit('DECREASE_SACHA_POKEMON_HP', 3);
 
         if (this.sachaPokemeonHp === 0) {
           await this.displayMessage(`SALAMECHE est KO!`);
+        this.$store.commit('RESTORE_SACHA_POKEMON_HP');
           this.$emit('endOfBattle');
         } else {
           this.step = 'ask for next move';
