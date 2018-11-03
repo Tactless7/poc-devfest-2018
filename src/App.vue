@@ -12,8 +12,8 @@
     <Sacha
       v-if="sacha.display"
     />
-    <div class="scene-shadow" v-if="play.mode === 'fight'">
-      <Fight />
+    <div class="scene-shadow" v-if="play.mode === 'battle'">
+      <Battle />
     </div>
     <GreetingsMessage v-on:greetingsFinished="startGame()" />
   </div>
@@ -24,7 +24,7 @@ import Scene from '@/components/Scene.vue';
 import Sacha from '@/components/Sacha.vue';
 import Grid from '@/components/Grid.vue';
 import GreetingsMessage from '@/components/GreetingsMessage.vue';
-import Fight from '@/components/Fight.vue';
+import Battle from '@/components/Battle.vue';
 
 export default {
   components: {
@@ -32,7 +32,7 @@ export default {
     Sacha,
     Grid,
     GreetingsMessage,
-    Fight
+    Battle
   },
   data() {
     return {
@@ -58,10 +58,10 @@ export default {
   },
   watch: {
     "sacha.y": function (y) {
-      // For now, until we have proper zone management, we switch to fight mode
+      // For now, until we have proper zone management, we switch to battle mode
       // whenever sacha go at the top of the scene.
       if (y < 90) {
-        this.play.mode = 'fight'
+        this.play.mode = 'battle'
       } else {
         this.play.mode = 'move'
       } 
