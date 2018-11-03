@@ -39,5 +39,13 @@ export default new Vuex.Store({
     SET_ENVIRONMENT(state, environment) {
       Vue.set(state, 'environment', environment);
     },
+    REDUCE_SACHA_POKEMON_HP(state, amount) {
+      let newHp = state.sacha.pokemon.hp - amount;
+      state.sacha.pokemon.hp = newHp < 0 ? 0 : newHp;
+    },
+    REDUCE_ENEMY_POKEMON_HP(state, amount) {
+      let newHp = state.enemy.pokemon.hp - amount;
+      state.enemy.pokemon.hp = newHp < 0 ? 0 : newHp;
+    }
   },
 });
