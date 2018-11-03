@@ -30,12 +30,12 @@ export default {
 
 <style scoped>
 .label {
-  font-size: 60%;
+  font-size: 50%;
   font-weight: 900;
 }
 
 .outside-hp-bar {
-  width: 170px;
+  width: 160px;
   height: 7px;
   border: black solid 4px;
   border-radius: 5px;
