@@ -7,7 +7,7 @@
         <HpBar v-bind:hp="enemyPokemeonHp" />
       </PokemonHpZone>
     </div>
-    <img class="pokemon-image sacha" src="@/assets/Salamèche_dos.png">
+    <img class="pokemon-image sacha" src="@/assets/salameche_back.png">
 
     <div class="pokemon-name sacha">
       <div> SALAMECHE </div>
@@ -16,7 +16,7 @@
         <div> {{sachaPokemeonHp}}/ 10 </div>
       </PokemonHpZone>
     </div>
-    <img class="pokemon-image enemy" src="@/assets/Bulbizarre.png">
+    <img class="pokemon-image enemy" src="@/assets/bulbizarre.png">
 
     <div class="message">
       <div class="move-buttons" v-if="step === 'ask for next move'">
