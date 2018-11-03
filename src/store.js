@@ -73,5 +73,13 @@ export default new Vuex.Store({
     CHANGE_ORIENTATION(state, orientation) {
       Vue.set(state.sacha, 'orientation', orientation);
     },
+    REDUCE_SACHA_POKEMON_HP(state, amount) {
+      let newHp = state.sacha.pokemon.hp - amount;
+      state.sacha.pokemon.hp = newHp < 0 ? 0 : newHp;
+    },
+    REDUCE_ENEMY_POKEMON_HP(state, amount) {
+      let newHp = state.enemy.pokemon.hp - amount;
+      state.enemy.pokemon.hp = newHp < 0 ? 0 : newHp;
+    }
   },
 });

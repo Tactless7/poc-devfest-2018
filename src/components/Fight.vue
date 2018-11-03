@@ -17,15 +17,17 @@
 
     <div class="message">
       <div class="move-buttons" v-if="step === 'ask for next move'">
-        <button class="next-move-button" v-on:click="moveSelected">CHARGE</button>
+        <button class="next-move-button" v-on:click="moveSelected('GRIFFE')">GRIFFE</button>
         <br/>
-        <button class="next-move-button" v-on:click="moveSelected">FOUET LIANE</button>
+        <button class="next-move-button" v-on:click="moveSelected('FLAMECHE')">FLAMECHE</button>
         <br/>
         <button class="next-move-button">-</button>
         <br/>
         <button class="next-move-button">-</button>
       </div>
-
+      <div v-if="message !== ''">
+       {{ message }}
+      </div>
     </div>
 
   </div>
@@ -33,10 +35,12 @@
 
 <script>
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const pick = array =>  array[Math.floor(Math.random() * array.length)];
 
 export default {
   data() {
     return {
+      message: '',
       step: 'ask for next move'
     };
   },
@@ -49,10 +53,22 @@ export default {
     }
   },
   methods: {
-    async moveSelected() {
-      this.step = 'show results'
-      await delay(2000)
+    async displayMessage(message) {
+      this.message = message;
+      await delay(2000);
+      this.message = '';
+    },
+    async moveSelected(move) {
+      this.step = 'select move for enemy';
+      const enemyMove = pick(['FOUET LIANE', 'CHARGE']);
+      this.step = 'display results';
+      await this.displayMessage(`BULBIZARRE ennemi utilise ${enemyMove}!`);
+      this.$store.commit('REDUCE_SACHA_POKEMON_HP', 2)
+      await this.displayMessage(`SALAMECHE utilise ${move}!`);
+      this.$store.commit('REDUCE_ENEMY_POKEMON_HP', 4)
       this.step = 'ask for next move';
+      // 'Coup critique!'
+      // 'C'est super efficace!'
     }
   }
 }
