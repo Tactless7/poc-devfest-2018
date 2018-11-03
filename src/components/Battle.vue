@@ -4,14 +4,15 @@
     <div class="pokemon-name enemy">
       BULBIZARRE
       <br />
-      HP: {{ enemyPokemeonHp }}
+      <HpBar v-bind:hp="enemyPokemeonHp" />
     </div>
     <img class="pokemon-image sacha" src="@/assets/Salamèche_dos.png">
 
     <div class="pokemon-name sacha">
       SALAMECHE
       <br />
-      HP: {{sachaPokemeonHp}}/ 10
+      <HpBar v-bind:hp="sachaPokemeonHp" />
+      <span style="padding-left: 70px;">{{sachaPokemeonHp}}/ 10</span>
     </div>
     <img class="pokemon-image enemy" src="@/assets/Bulbizarre.png">
 
@@ -34,10 +35,15 @@
 </template>
 
 <script>
+import HpBar from '@/components/HpBar.vue'
+
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const pick = array =>  array[Math.floor(Math.random() * array.length)];
 
 export default {
+  components: {
+    HpBar
+  },
   data() {
     return {
       message: '',
