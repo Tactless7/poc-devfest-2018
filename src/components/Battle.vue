@@ -12,8 +12,8 @@
     <div class="pokemon-name sacha">
       <div> SALAMECHE </div>
       <PokemonHpZone who="sacha">
-        <HpBar style="margin-top: -14px;" v-bind:hp="sachaPokemeonHp" />
-        <div style="margin-top: -7px;"> {{sachaPokemeonHp}}/ 10 </div>
+        <HpBar v-bind:hp="sachaPokemeonHp" />
+        <div> {{sachaPokemeonHp}}/ 10 </div>
       </PokemonHpZone>
     </div>
     <img class="pokemon-image enemy" src="@/assets/Bulbizarre.png">
