@@ -18,7 +18,7 @@ export default {
 .hp-zone {
   border-bottom: 7px solid black;
   border-radius: 5px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .sacha .hp-zone {
