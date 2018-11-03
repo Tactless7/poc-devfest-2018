@@ -59,14 +59,27 @@ export default {
       this.message = '';
     },
     async moveSelected(move) {
-      this.step = 'select move for enemy';
-      const enemyMove = pick(['FOUET LIANE', 'CHARGE']);
-      this.step = 'display results';
-      await this.displayMessage(`BULBIZARRE ennemi utilise ${enemyMove}!`);
-      this.$store.commit('DECREASE_SACHA_POKEMON_HP', 2)
+      this.step = 'resolve battle turn';
+
       await this.displayMessage(`SALAMECHE utilise ${move}!`);
-      this.$store.commit('DECREASE_ENEMY_POKEMON_HP', 4)
-      this.step = 'ask for next move';
+      this.$store.commit('DECREASE_ENEMY_POKEMON_HP', 4);
+
+      if (this.enemyPokemeonHp === 0) {
+        await this.displayMessage(`BULBIZARRE ennemi est KO!`);
+        await this.displayMessage(`SALAMECHE a gagné 83 points EXP.!`);
+        this.$emit('endOfBattle');
+      } else {
+        const enemyMove = pick(['FOUET LIANE', 'CHARGE']);
+        await this.displayMessage(`BULBIZARRE ennemi utilise ${enemyMove}!`);
+        this.$store.commit('DECREASE_SACHA_POKEMON_HP', 2);
+
+        if (this.sachaPokemeonHp === 0) {
+          await this.displayMessage(`SALAMECHE est KO!`);
+          this.$emit('endOfBattle');
+        } else {
+          this.step = 'ask for next move';
+        }
+      }
       // 'Coup critique!'
       // 'C'est super efficace!'
     }
