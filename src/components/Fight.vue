@@ -63,9 +63,9 @@ export default {
       const enemyMove = pick(['FOUET LIANE', 'CHARGE']);
       this.step = 'display results';
       await this.displayMessage(`BULBIZARRE ennemi utilise ${enemyMove}!`);
-      this.$store.commit('REDUCE_SACHA_POKEMON_HP', 2)
+      this.$store.commit('DECREASE_SACHA_POKEMON_HP', 2)
       await this.displayMessage(`SALAMECHE utilise ${move}!`);
-      this.$store.commit('REDUCE_ENEMY_POKEMON_HP', 4)
+      this.$store.commit('DECREASE_ENEMY_POKEMON_HP', 4)
       this.step = 'ask for next move';
       // 'Coup critique!'
       // 'C'est super efficace!'
