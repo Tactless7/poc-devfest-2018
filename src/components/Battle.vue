@@ -6,7 +6,7 @@
     <div class="pokemon-infos">
       <div> BULBIZARRE </div>
       <PokemonHpZone who="enemy">
-        <HpBar v-bind:hp="enemyPokemeonHp" />
+        <HpBar v-bind:hp="enemyPokemonHp" />
       </PokemonHpZone>
     </div>
   </div>
@@ -16,8 +16,8 @@
     <div class="pokemon-infos">
       <div> SALAMECHE </div>
       <PokemonHpZone who="sacha">
-        <HpBar v-bind:hp="sachaPokemeonHp" />
-        <div> {{sachaPokemeonHp}}/ 10 </div>
+        <HpBar v-bind:hp="sachaPokemonHp" />
+        <div> {{sachaPokemonHp}}/ 10 </div>
       </PokemonHpZone>
     </div>
   </div>
@@ -59,10 +59,10 @@ export default {
     };
   },
   computed: {
-    enemyPokemeonHp() {
+    enemyPokemonHp() {
       return this.$store.state.enemy.pokemon.hp
     },
-    sachaPokemeonHp() {
+    sachaPokemonHp() {
       return this.$store.state.sacha.pokemon.hp
     }
   },
@@ -95,11 +95,11 @@ export default {
     async selectSachaMove(move) {
       this.step = 'resolve battle turn';
       await this.resolveSachaMove(move)
-      if (this.enemyPokemeonHp === 0) {
+      if (this.enemyPokemonHp === 0) {
         await this.endBattle({ winner: 'sacha' })
       } else {
         await this.pickEnemyMoveAndResolve()
-        if (this.sachaPokemeonHp === 0) {
+        if (this.sachaPokemonHp === 0) {
           await this.endBattle({ winner: 'enemy' })
         } else {
           this.step = 'ask for next move';
