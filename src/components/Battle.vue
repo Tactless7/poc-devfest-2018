@@ -35,6 +35,26 @@
       {{ message }}
     </div>
 
+    <div v-if="step === 'display sasha move'">
+      SALAMECHE utilise {{ sashaMove }}!
+    </div>
+
+    <div v-if="step === 'display enemy ko'">
+      BULBIZARRE ennemi est KO!
+    </div>
+
+    <div v-if="step === 'display pokemon XP'">
+      SALAMECHE a gagné 83 points EXP.!
+    </div>
+
+    <div v-if="step === 'display enemey move'">
+      BULBIZARRE ennemi utilise {{ enemyMove }}!
+    </div>
+
+    <div v-if="step === 'display sacha ko'">
+      SALAMECHE est KO!
+    </div>
+
   </div>
 
 </div>
@@ -54,6 +74,8 @@ export default {
   },
   data() {
     return {
+      sashaMove: '',
+      enemyMove: '',
       message: '',
       step: 'ask for next move'
     };
@@ -66,42 +88,43 @@ export default {
       return this.$store.state.sacha.pokemon.hp
     }
   },
+  watch: {
+    async enemyPokemonHp(hp) {
+      if (hp === 0) {
+        await this.setStepAndWait('display enemy ko');
+        await this.setStepAndWait('display pokemon XP');
+        this.$store.commit('RESTORE_ENEMY_POKEMON_HP');
+        this.$emit('endOfBattle');
+      }
+    },
+    async sachaPokemonHp(hp) {
+      if (hp === 0) {
+        await this.setStepAndWait('display sacha ko');
+        this.$store.commit('RESTORE_SACHA_POKEMON_HP');
+        this.$emit('endOfBattle');
+      }
+    }
+  },
   methods: {
-    async displayMessage(message) {
-      this.message = message;
+    async setStepAndWait(step) {
+      this.step = step;
       await delay(2000);
-      this.message = '';
     },
     async resolveSachaMove(move) {
-      await this.displayMessage(`SALAMECHE utilise ${move}!`);
+      this.sashaMove = move;
+      await this.setStepAndWait('display sasha move');
       this.$store.commit('DECREASE_ENEMY_POKEMON_HP', 4);
     },
     async pickEnemyMoveAndResolve() {
-      const enemyMove = pick(['FOUET LIANE', 'CHARGE']);
-      await this.displayMessage(`BULBIZARRE ennemi utilise ${enemyMove}!`);
+      this.enemyMove = pick(['FOUET LIANE', 'CHARGE']);
+      await this.setStepAndWait('display enemey move')
       this.$store.commit('DECREASE_SACHA_POKEMON_HP', 3);
     },
-    async endBattle({winner}) {
-      if (winner === 'sacha') {
-        await this.displayMessage(`BULBIZARRE ennemi est KO!`);
-        await this.displayMessage(`SALAMECHE a gagné 83 points EXP.!`);
-        this.$store.commit('RESTORE_ENEMY_POKEMON_HP');
-      } else if (winner === 'enemy') {
-        await this.displayMessage(`SALAMECHE est KO!`);
-        this.$store.commit('RESTORE_SACHA_POKEMON_HP');
-      }
-      this.$emit('endOfBattle');
-    },
     async selectSachaMove(move) {
-      this.step = 'resolve battle turn';
       await this.resolveSachaMove(move)
-      if (this.enemyPokemonHp === 0) {
-        await this.endBattle({ winner: 'sacha' })
-      } else {
+      if (this.enemyPokemonHp !== 0) {
         await this.pickEnemyMoveAndResolve()
-        if (this.sachaPokemonHp === 0) {
-          await this.endBattle({ winner: 'enemy' })
-        } else {
+        if (this.sachaPokemonHp !== 0) {
           this.step = 'ask for next move';
         }
       }
