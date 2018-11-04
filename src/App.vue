@@ -80,6 +80,7 @@ export default {
   position: relative;
   display: inline-block;
   font-family: pokemon;
+  outline: none;
 }
 
 .scene-shadow {
