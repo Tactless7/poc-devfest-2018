@@ -84,7 +84,7 @@ export default {
 
 .scene-shadow {
   position: absolute;
-  background: rgba(200, 200, 200, 0.5);
+  background: rgba(255, 255, 255, 0.5);
   width: 100%;
   height: 100%;
   top: 0;

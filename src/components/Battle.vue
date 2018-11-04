@@ -31,10 +31,6 @@
       <button> - </button>
     </div>
 
-    <div v-if="message !== ''">
-      {{ message }}
-    </div>
-
     <div v-if="step === 'display sasha move'">
       SALAMECHE utilise {{ sashaMove }}!
     </div>
@@ -76,7 +72,6 @@ export default {
     return {
       sashaMove: '',
       enemyMove: '',
-      message: '',
       step: 'ask for next move'
     };
   },
@@ -145,7 +140,8 @@ export default {
   left: 15%;
   background: #f8f8f8;
   z-index: 2;
-  border:#aaa solid 2px; 
+  border:#ddd solid 2px;
+  box-shadow: 5px 5px 20px #999;
 }
 
 .pokemon-image {
@@ -182,27 +178,29 @@ export default {
 }
 
 .message {
+  font-size: 158%;
   position: absolute;
-  width: 85%;
-  height: 15%;
-  bottom: 0;
-  left: 0;
-  border: #888 solid 2px;
+  width: 90%;
+  height: 18%;
+  bottom: -15px;
+  left: -15px;
+  background: #f8f8f8;
+  border:black solid 4px;
+  border-radius: 10px;
 }
 
 .move-buttons {
   position: absolute;
   width: 60%;
-  top: 0;
+  top: -8px;
   right: 0;
 }
 
 button {
-  margin-top: -8px;
   border: 0px;
   background: transparent;
   font-family: pokemon;
-  font-size: 160%;
+  font-size: 100%;
 }
 
 .sacha div {
