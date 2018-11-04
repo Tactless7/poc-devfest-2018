@@ -41,11 +41,11 @@
 </template>
 
 <script>
-import HpBar from '@/components/HpBar.vue'
-import PokemonHpZone from '@/components/PokemonHpZone.vue'
+import HpBar from './HpBar.vue';
+import PokemonHpZone from './PokemonHpZone.vue';
 
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-const pick = array =>  array[Math.floor(Math.random() * array.length)];
+const delay = duration => new Promise(resolve => setTimeout(resolve, duration));
+const pick = array => array[Math.floor(Math.random() * array.length)];
 
 export default {
   components: {
@@ -90,7 +90,7 @@ export default {
 
         if (this.sachaPokemeonHp === 0) {
           await this.displayMessage(`SALAMECHE est KO!`);
-        this.$store.commit('RESTORE_SACHA_POKEMON_HP');
+          this.$store.commit('RESTORE_SACHA_POKEMON_HP');
           this.$emit('endOfBattle');
         } else {
           this.step = 'ask for next move';
