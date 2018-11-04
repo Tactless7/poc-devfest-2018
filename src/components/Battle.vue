@@ -25,8 +25,8 @@
   <div class="message">
 
     <div class="move-buttons" v-if="step === 'ask for next move'">
-      <button v-on:click="selectMove('GRIFFE')"> GRIFFE </button> <br/>
-      <button v-on:click="selectMove('FLAMECHE')"> FLAMECHE </button> <br/>
+      <button v-on:click="selectSachaMove('GRIFFE')"> GRIFFE </button> <br/>
+      <button v-on:click="selectSachaMove('FLAMECHE')"> FLAMECHE </button> <br/>
       <button> - </button> <br/>
       <button> - </button>
     </div>
@@ -72,26 +72,35 @@ export default {
       await delay(2000);
       this.message = '';
     },
-    async selectMove(move) {
-      this.step = 'resolve battle turn';
-
+    async resolveSachaMove(move) {
       await this.displayMessage(`SALAMECHE utilise ${move}!`);
       this.$store.commit('DECREASE_ENEMY_POKEMON_HP', 4);
-
-      if (this.enemyPokemeonHp === 0) {
+    },
+    async pickEnemyMoveAndResolve() {
+      const enemyMove = pick(['FOUET LIANE', 'CHARGE']);
+      await this.displayMessage(`BULBIZARRE ennemi utilise ${enemyMove}!`);
+      this.$store.commit('DECREASE_SACHA_POKEMON_HP', 3);
+    },
+    async endBattle({winner}) {
+      if (winner === 'sacha') {
         await this.displayMessage(`BULBIZARRE ennemi est KO!`);
         await this.displayMessage(`SALAMECHE a gagné 83 points EXP.!`);
         this.$store.commit('RESTORE_ENEMY_POKEMON_HP');
-        this.$emit('endOfBattle');
+      } else if (winner === 'enemy') {
+        await this.displayMessage(`SALAMECHE est KO!`);
+        this.$store.commit('RESTORE_SACHA_POKEMON_HP');
+      }
+      this.$emit('endOfBattle');
+    },
+    async selectSachaMove(move) {
+      this.step = 'resolve battle turn';
+      await this.resolveSachaMove(move)
+      if (this.enemyPokemeonHp === 0) {
+        await this.endBattle({ winner: 'sacha' })
       } else {
-        const enemyMove = pick(['FOUET LIANE', 'CHARGE']);
-        await this.displayMessage(`BULBIZARRE ennemi utilise ${enemyMove}!`);
-        this.$store.commit('DECREASE_SACHA_POKEMON_HP', 3);
-
+        await this.pickEnemyMoveAndResolve()
         if (this.sachaPokemeonHp === 0) {
-          await this.displayMessage(`SALAMECHE est KO!`);
-          this.$store.commit('RESTORE_SACHA_POKEMON_HP');
-          this.$emit('endOfBattle');
+          await this.endBattle({ winner: 'enemy' })
         } else {
           this.step = 'ask for next move';
         }
