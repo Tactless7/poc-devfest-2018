@@ -24,11 +24,11 @@
 
   <div class="message">
 
-    <div class="move-buttons" v-if="step === 'ask for next move'">
-      <button v-on:click="selectSachaMove('GRIFFE')"> GRIFFE </button> <br/>
-      <button v-on:click="selectSachaMove('FLAMECHE')"> FLAMECHE </button> <br/>
-      <button> - </button> <br/>
-      <button> - </button>
+    <div class="move-options" v-if="step === 'ask for next move'">
+      <div v-on:click="selectSachaMove('GRIFFE')"> GRIFFE </div>
+      <div v-on:click="selectSachaMove('FLAMECHE')"> FLAMECHE </div>
+      <div> - </div>
+      <div> - </div>
     </div>
 
     <div v-if="step === 'display sasha move'">
@@ -189,18 +189,11 @@ export default {
   border-radius: 10px;
 }
 
-.move-buttons {
+.move-options {
   position: absolute;
   width: 60%;
   top: -8px;
   right: 0;
-}
-
-button {
-  border: 0px;
-  background: transparent;
-  font-family: pokemon;
-  font-size: 100%;
 }
 
 .sacha div {
