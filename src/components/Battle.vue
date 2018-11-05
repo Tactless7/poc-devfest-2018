@@ -22,7 +22,16 @@
   </div>
 
   <div class="message">
-    BULBIZARRE contre SALAMECHE
+
+    <div class="move-options">
+      <div v-on:click="selectSachaMove('GRIFFE')"> GRIFFE </div>
+      <div v-on:click="selectSachaMove('FLAMECHE')"> FLAMECHE </div>
+      <div> - </div>
+      <div> - </div>
+    </div>
+
+    <div> {{ sachaMove }} </div>
+
   </div>
 
 </div>
@@ -37,6 +46,11 @@ export default {
     HpBar,
     PokemonHpZone
   },
+  data() {
+    return {
+      sachaMove: ''
+    };
+  },
   computed: {
     enemyPokemonHp() {
       return this.$store.state.enemy.pokemon.hp
@@ -45,6 +59,11 @@ export default {
       return this.$store.state.sacha.pokemon.hp
     }
   },
+  methods: {
+    selectSachaMove(move) {
+      this.sachaMove = move;
+    }
+  }
 };
 </script>
 
@@ -104,6 +123,13 @@ export default {
   background: #f8f8f8;
   border:black solid 4px;
   border-radius: 10px;
+}
+
+.move-options {
+  position: absolute;
+  width: 60%;
+  top: -8px;
+  right: 0;
 }
 
 .sacha div {
