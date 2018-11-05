@@ -10,6 +10,7 @@ export default new Vuex.Store({
         x: 9,
         y: 3,
       },
+      orientation: 'down',
     },
     environment: [],
   },
@@ -22,6 +23,9 @@ export default new Vuex.Store({
       let x = (state.sacha.position.x + 1) * 40 - 20 + 2;
 
       return { x, y };
+    },
+    getOrientation: state => {
+      return state.sacha.orientation;
     },
   },
 
@@ -43,6 +47,7 @@ export default new Vuex.Store({
     },
     moveSacha({ commit, state, getters }, orientation) {
       let position = state.sacha.position;
+      commit('CHANGE_ORIENTATION', orientation);
       switch (orientation) {
         case 'up':
           if (getters.canWalk(position.x, position.y - 1)) position.y--;
@@ -67,6 +72,9 @@ export default new Vuex.Store({
     },
     UPDATE_POSITION(state, position) {
       Vue.set(state.sacha, 'position', position);
+    },
+    CHANGE_ORIENTATION(state, orientation) {
+      Vue.set(state.sacha, 'orientation', orientation);
     },
   },
 });
