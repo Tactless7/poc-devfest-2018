@@ -75,15 +75,19 @@ export default {
       this.step = step;
       await delay(2000);
     },
-    async selectSachaMove(move) {
+    async resolveSachaMove(move) {
       this.sachaMove = move;
       await this.setStepAndWait('display sacha move');
       this.$store.commit('DECREASE_ENEMY_POKEMON_HP', 4);
-
+    },
+    async pickEnemyMoveAndResolve() {
       this.enemyMove = pick(['FOUET LIANE', 'CHARGE']);
-      await this.setStepAndWait('display enemy move');
+      await this.setStepAndWait('display enemy move')
       this.$store.commit('DECREASE_SACHA_POKEMON_HP', 3);
-
+    },
+    async selectSachaMove(move) {
+      await this.resolveSachaMove(move)
+      await this.pickEnemyMoveAndResolve()
       this.step = 'ask for next move'
     }
   }
