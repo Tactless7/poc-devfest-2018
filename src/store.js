@@ -8,12 +8,12 @@ export default new Vuex.Store({
     sacha: {
       position: {},
       pokemon: {
-        hp: 3
+        hp: 10
       }
     },
     enemy: {
       pokemon: {
-        hp: 6
+        hp: 10
       } 
     },
     environment: [],
@@ -38,6 +38,10 @@ export default new Vuex.Store({
   mutations: {
     SET_ENVIRONMENT(state, environment) {
       Vue.set(state, 'environment', environment);
+    },
+    DECREASE_ENEMY_POKEMON_HP(state, amount) {
+      let newHp = state.enemy.pokemon.hp - amount;
+      state.enemy.pokemon.hp = newHp < 0 ? 0 : newHp;
     }
   },
 });
