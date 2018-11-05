@@ -6,7 +6,15 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     sacha: {
-      position: {}
+      position: {},
+      pokemon: {
+        hp: 3
+      }
+    },
+    enemy: {
+      pokemon: {
+        hp: 6
+      } 
     },
     environment: [],
   },
