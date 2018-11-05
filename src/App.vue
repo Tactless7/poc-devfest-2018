@@ -41,7 +41,7 @@ export default {
       sacha: {
         x: 10 * 40 - 20 + 2,
         y: 4 * 40 - 20,
-        display: false,
+        display: false
       },
       play: {
         mode: 'move'
@@ -52,13 +52,13 @@ export default {
     startGame() {
       this.sacha.display = true;
       this.$refs.game.focus();
-    },
+    }
   },
   created() {
     this.$store.dispatch('getEnvironment');
   },
   watch: {
-    "sacha.y": function (y) {
+    'sacha.y': function(y) {
       // For now, until we have proper zone management, we switch to battle mode
       // whenever sacha go at the top of the scene.
       if (y < 90) {
