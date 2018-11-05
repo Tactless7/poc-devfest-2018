@@ -81,6 +81,17 @@ export default {
   display: inline-block;
   font-family: pokemon;
   outline: none;
+
+  /* center the display (for this we have to specify precise width and height
+  here */
+  width: 802px;
+  height: 722px;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .scene-shadow {
