@@ -57,7 +57,7 @@ export default {
     this.$store.dispatch('getEnvironment');
   },
   watch: {
-    "sacha.y": function (y) {
+    'sacha.y': function(y) {
       // For now, until we have proper zone management, we switch to battle mode
       // whenever sacha go at the top of the scene.
       if (y < 90) {
