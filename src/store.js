@@ -8,6 +8,14 @@ export default new Vuex.Store({
     positionSacha: {},
     environment: [],
   },
+  getters: {
+    canWalk: state => (x, y) => {
+      let xSquare = (x + 20 - 2) / 40;
+      let ySquare = (y + 20) / 40;
+      return state.environment[ySquare - 1][xSquare - 1].canWalk;
+    },
+  },
+
   actions: {
     getEnvironment({ commit }) {
       const environment = new Array(18).fill([]).map((array, row) =>
