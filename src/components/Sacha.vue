@@ -1,7 +1,7 @@
 <template>
   <div  v-bind:style="{
-      top: `${y}px`,
-      left: `${x}px`
+      top: `${position.y}px`,
+      left: `${position.x}px`
     }">
     <img 
       src="https://github.com/jamescastells/pokemonHTML/raw/master/sprites/down.png"
@@ -11,7 +11,11 @@
 
 <script>
 export default {
-  props: ['x', 'y'],
+  computed: {
+    position() {
+      return this.$store.getters.sachaPixelPosition;
+    },
+  },
 };
 </script>
 
