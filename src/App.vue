@@ -14,6 +14,9 @@
       v-bind:x="sacha.x"
       v-bind:y="sacha.y"
     />
+    <div v-if="play.mode === 'battle'">
+      <Battle v-on:endOfBattle="play.mode = 'move'"/>
+    </div>
     <GreetingsMessage v-on:greetingsFinished="startGame()" />
   </div>
 </template>
@@ -23,13 +26,15 @@ import Scene from '@/components/Scene.vue';
 import Sacha from '@/components/Sacha.vue';
 import Grid from '@/components/Grid.vue';
 import GreetingsMessage from '@/components/GreetingsMessage.vue';
+import Battle from '@/components/Battle.vue';
 
 export default {
   components: {
     Scene,
     Sacha,
     Grid,
-    GreetingsMessage
+    GreetingsMessage,
+    Battle
   },
   data() {
     return {
