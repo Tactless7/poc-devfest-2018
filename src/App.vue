@@ -2,17 +2,15 @@
   <div class="display"
     ref="game"
     tabindex="0"
-    v-on:keypress.up="sacha.y -= 40"
-    v-on:keypress.down="sacha.y += 40"
-    v-on:keypress.left="sacha.x -= 40"
-    v-on:keypress.right="sacha.x += 40"
+    v-on:keypress.up="move('up')"
+    v-on:keypress.down="move('down')"
+    v-on:keypress.left="move('left')"
+    v-on:keypress.right="move('right')"
   >
     <Scene />
     <Grid />
     <Sacha
       v-if="sacha.display"
-      v-bind:x="sacha.x"
-      v-bind:y="sacha.y"
     />
     <GreetingsMessage v-on:greetingsFinished="startGame()" />
   </div>
@@ -34,8 +32,6 @@ export default {
   data() {
     return {
       sacha: {
-        x: 10 * 40 - 20 + 2,
-        y: 4 * 40 - 20,
         display: false,
       },
     };
@@ -44,6 +40,9 @@ export default {
     startGame() {
       this.sacha.display = true;
       this.$refs.game.focus();
+    },
+    move(orientation) {
+      this.$store.dispatch('moveSacha', orientation);
     },
   },
   created() {
