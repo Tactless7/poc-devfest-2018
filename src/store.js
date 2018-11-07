@@ -28,6 +28,11 @@ export default new Vuex.Store({
     getOrientation: state => {
       return state.sacha.orientation;
     },
+    typeOfCurrentSquare: state => {
+      const x = state.sacha.position.x
+      const y = state.sacha.position.y
+      return state.environment[y][x].type
+    },
   },
 
   actions: {
@@ -53,7 +58,7 @@ export default new Vuex.Store({
       }
 
       commit('UPDATE_POSITION', position);
-    },
+    }
   },
   mutations: {
     SET_ENVIRONMENT(state, environment) {

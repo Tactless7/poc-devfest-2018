@@ -36,6 +36,18 @@ export default {
       },
     };
   },
+  computed: {
+    typeOfCurrentSquare() {
+      return this.$store.getters.typeOfCurrentSquare;
+    }
+  },
+  watch: {
+    typeOfCurrentSquare(type) {
+      if (type === 'grass') {
+        alert('Battle!');
+      }
+    }
+  },
   methods: {
     startGame() {
       this.sacha.display = true;
