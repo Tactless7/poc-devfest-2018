@@ -31,7 +31,11 @@ export default new Vuex.Store({
     typeOfCurrentSquare: state => {
       const x = state.sacha.position.x
       const y = state.sacha.position.y
-      return state.environment[y][x].type
+      if (state.environment[y] === undefined) {
+        return ''
+      } else {
+        return state.environment[y][x].type
+      }
     },
   },
 
