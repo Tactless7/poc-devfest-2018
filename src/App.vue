@@ -12,7 +12,9 @@
     <Sacha
       v-if="sacha.display"
     />
-    <Battle v-if="play.mode === 'battle'" />
+    <div class="scene-shadow" v-if="play.mode === 'battle'">
+      <Battle />
+    </div>
     <GreetingsMessage v-on:greetingsFinished="startGame()" />
   </div>
 </template>
@@ -92,4 +94,13 @@ export default {
   right: 0;
   margin: auto;
 }
+
+.scene-shadow {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+} 
 </style>
