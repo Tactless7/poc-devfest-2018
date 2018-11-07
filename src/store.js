@@ -12,6 +12,14 @@ export default new Vuex.Store({
         y: 3,
       },
       orientation: 'down',
+      pokemon: {
+        hp: 3
+      },
+    },
+    enemy: {
+      pokemon: {
+        hp: 6
+      } 
     },
     environment: [],
   },
