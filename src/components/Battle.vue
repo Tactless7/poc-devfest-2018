@@ -46,6 +46,10 @@
       BULBIZARRE ennemi utilise {{ enemyMove }}!
     </div>
 
+    <div v-if="step === 'display sacha ko'">
+      SALAMECHE est KO!
+    </div>
+
   </div>
 
 </div>
@@ -86,6 +90,13 @@ export default {
         this.$store.commit('RESTORE_ENEMY_POKEMON_HP');
         this.$emit('endOfBattle');
       }
+    },
+    async sachaPokemonHp(hp) {
+      if (hp === 0) {
+        await this.setStepAndWait('display sacha ko');
+        this.$store.commit('RESTORE_SACHA_POKEMON_HP');
+        this.$emit('endOfBattle');
+      }
     }
   },
   methods: {
@@ -107,7 +118,9 @@ export default {
       await this.resolveSachaMove(move);
       if (this.enemyPokemonHp !== 0) {
         await this.pickEnemyMoveAndResolve();
-        this.step = 'ask for next move';
+        if (this.sachaPokemonHp !== 0) {
+          this.step = 'ask for next move';
+        }
       } 
     }
   },
