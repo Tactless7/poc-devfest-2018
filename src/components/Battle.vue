@@ -83,7 +83,7 @@ export default {
       if (hp === 0) {
         await this.setStepAndWait('display enemy ko');
         await this.setStepAndWait('display pokemon XP');
-        this.step = ''
+        this.$emit('endOfBattle');
       }
     }
   },
