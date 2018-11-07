@@ -8,7 +8,7 @@
     v-on:keypress.right="move('right')"
   >
     <Scene />
-    <Grid />
+    <!-- <Grid /> -->
     <Sacha
       v-if="sacha.display"
     />
@@ -61,5 +61,17 @@ export default {
   position: relative;
   display: inline-block;
   font-family: pokemon;
+  outline: none;
+
+  /* center the display (for this we have to specify precise width and height
+  here */
+  width: 802px;
+  height: 722px;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 </style>

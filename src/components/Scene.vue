@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="@/assets/pallet-town-only.png">
+    <img src="@/assets/pallet_town.png">
   </div>
 </template>
 
@@ -10,4 +10,10 @@ export default {};
 
 
 <style scoped>
+
+img {
+  width: 800px;
+  margin-left: 2px;
+  image-rendering: pixelated;
+}
 </style>
